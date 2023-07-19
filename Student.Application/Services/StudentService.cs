@@ -1,5 +1,8 @@
-﻿using Student.Application.Dtos;
+﻿using AutoMapper;
+using Student.Application.Dtos;
 using Student.Application.Interfaces;
+using Student.Domain.Entities;
+using Student.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,29 +13,41 @@ namespace Student.Application.Services
 {
     public class StudentService : IStudentService
     {
-        public Task Add(StudentDto studentDto)
+        private readonly IStudentRepository _studentRepository;
+        private readonly IMapper _mapper;
+
+        public StudentService(IStudentRepository studentRepository, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _studentRepository = studentRepository;
+            _mapper = mapper;
         }
 
-        public Task Delete(int id)
+        public async Task<IEnumerable<StudentDto>> GetAll()
         {
-            throw new NotImplementedException();
+            var student = await _studentRepository.GetStudents();
+            var studentDto = _mapper.Map<IEnumerable<StudentDto>>(student);
+            return studentDto;
         }
-
-        public Task<IQueryable<StudentDto>> GetAll()
+        public async Task<StudentDto> GetById(int id)
         {
-            throw new NotImplementedException();
+            var student = await _studentRepository.GetStudentById(id);
+            var studentDto = _mapper.Map<StudentDto>(student);
+            return studentDto;
         }
-
-        public Task<StudentDto> GetById(int id)
+        public async Task Add(StudentDto studentDto)
         {
-            throw new NotImplementedException();
+            var studentTransfer = _mapper.Map<Studenten>(studentDto);
+            await _studentRepository.CreateStudent(studentTransfer);
+            
         }
-
-        public Task Update(StudentDto studentDto)
+        public async Task Update(StudentDto studentDto)
         {
-            throw new NotImplementedException();
+            var studentTransfer = _mapper.Map<Studenten>(studentDto);
+            await _studentRepository.UpdateStudent(studentTransfer);
+        }
+        public async Task Delete(int id)
+        {
+            await _studentRepository.RemoveStudent(id);
         }
     }
 }

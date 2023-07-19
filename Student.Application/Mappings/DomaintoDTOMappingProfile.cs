@@ -11,7 +11,10 @@ namespace Student.Application.Mappings
 {
     public class DomaintoDTOMappingProfile : Profile
     {
-        CreateMap<Student, StudentDto>().ReverseMap();
-        CreateMap<Course, CourseDto>().ReserverMap();
+        public DomaintoDTOMappingProfile()
+        {
+            CreateMap<Studenten, StudentDto>().ReverseMap();
+            CreateMap<Course, CourseDto>().ReverseMap();
+        }
     }
 }

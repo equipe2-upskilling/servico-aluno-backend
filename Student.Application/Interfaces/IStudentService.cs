@@ -9,7 +9,7 @@ namespace Student.Application.Interfaces
 {
     public interface IStudentService
     {
-        Task<IQueryable<StudentDto>> GetAll();
+        Task<IEnumerable<StudentDto>> GetAll();
         Task<StudentDto> GetById(int id);
         Task Add(StudentDto studentDto);
         Task Update(StudentDto studentDto);

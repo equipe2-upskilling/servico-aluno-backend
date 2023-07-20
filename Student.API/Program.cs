@@ -1,11 +1,7 @@
 using Student.CrossCutting.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddInfrasctureAPI(builder.Configuration);
 builder.Services.AddSwaggerGen();

@@ -16,5 +16,22 @@ namespace Student.Infrastructure.Context
 
         public DbSet<Studenten> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<StudentCourse> StudentsCourses { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<StudentCourse>()
+                .HasKey(sc => new { sc.StudentenId, sc.CourseId });
+
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne(sc => sc.Studenten)
+                .WithMany(s => s.StudentCourse)
+                .HasForeignKey(sc => sc.StudentenId);
+
+            modelBuilder.Entity<StudentCourse>()
+                .HasOne(sc => sc.Course)
+                .WithMany(c => c.StudentCourse)
+                .HasForeignKey(sc => sc.CourseId);
+        }
     }
 }

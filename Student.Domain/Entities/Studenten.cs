@@ -7,7 +7,7 @@ namespace Student.Domain.Entities
     public class Studenten
     {
         [Key]
-        public int Id { get; set; }
+        public int StudentenId { get; set; }
         [Required(ErrorMessage = "O nome não pode ser vazio")]
         [MaxLength(100)]
         [MinLength(2,ErrorMessage = "O nome não pode ter menos do que dois caracteres")]
@@ -17,9 +17,7 @@ namespace Student.Domain.Entities
         [MaxLength(300)]
         [MinLength(20, ErrorMessage = "O endereço não pode ter menos de vintes caracteres")]
         public string? Address { get; set; }
-
-        [JsonIgnore]
-        public Course Course { get; set; }
+        public List<StudentCourse> StudentCourse { get; set; }
     }
 }
 

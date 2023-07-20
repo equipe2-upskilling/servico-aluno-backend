@@ -4,14 +4,16 @@ using Student.Application.Interfaces;
 
 namespace Student.API.Controllers
 {
-    public class StudentController : Controller
+    [Route("student/v1/[Controller]")]
+    [ApiController]
+    public class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
-
         public StudentController(IStudentService studentService)
         {
             _studentService = studentService;
         }
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<StudentDto>>> GetAll()
         {
@@ -19,6 +21,7 @@ namespace Student.API.Controllers
             if(student == null) return NotFound();
             return Ok(student);
         }
+
         [HttpGet("{id:int}", Name = "GetStudent")]
         public async Task<ActionResult<StudentDto>> GetStudent(int id)
         {

@@ -21,6 +21,9 @@ namespace Student.CrossCutting.IoC
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<ICourseService, CourseService>();
+            services.AddScoped<IStudentCourseRepository, StudentCourseRepository>();
+            services.AddScoped<IStudentCourseService, StudentCourseService>();
 
             services.AddAutoMapper(typeof(DomaintoDTOMappingProfile));
 

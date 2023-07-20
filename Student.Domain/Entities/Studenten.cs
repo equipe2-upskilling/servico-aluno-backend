@@ -11,8 +11,7 @@ namespace Student.Domain.Entities
         [Required(ErrorMessage = "O nome não pode ser vazio")]
         [MaxLength(100)]
         [MinLength(2,ErrorMessage = "O nome não pode ter menos do que dois caracteres")]
-        public required string Name { get; set; }
-
+        public string Name { get; set; }
         [Required(ErrorMessage = "O endereço não pode ser vazio")]
         [MaxLength(300)]
         [MinLength(20, ErrorMessage = "O endereço não pode ter menos de vintes caracteres")]

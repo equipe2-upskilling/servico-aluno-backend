@@ -41,11 +41,11 @@ namespace Student.Infrastructure.Repositories
             await _context.SaveChangesAsync();
             return student;
         }
-        public async Task RemoveStudent(int id)
+        public async Task<Studenten> RemoveStudent(Studenten studenten)
         {
-            var student = _context.Students.FindAsync(id);
-            _context.Students.Remove(student);
+            _context.Students.Remove(studenten);
             await _context.SaveChangesAsync();
+            return studenten;
         }
 
     }

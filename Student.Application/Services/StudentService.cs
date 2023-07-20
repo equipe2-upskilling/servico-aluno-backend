@@ -47,7 +47,8 @@ namespace Student.Application.Services
         }
         public async Task Delete(int id)
         {
-            await _studentRepository.RemoveStudent(id);
+            var studentResult = _studentRepository.GetStudentById(id).Result;
+            await _studentRepository.RemoveStudent(studentResult);
         }
     }
 }

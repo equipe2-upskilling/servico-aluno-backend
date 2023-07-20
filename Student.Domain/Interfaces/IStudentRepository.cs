@@ -8,6 +8,6 @@ namespace Student.Domain.Interfaces
         Task<Studenten> GetStudentById (int id);
         Task<Studenten> CreateStudent(Studenten student);
         Task<Studenten> UpdateStudent(Studenten student);
-        Task RemoveStudent(int id);
+        Task<Studenten> RemoveStudent(Studenten student);
     }
 }

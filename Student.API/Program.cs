@@ -1,3 +1,4 @@
+using Student.API.ProducerSQS;
 using Student.CrossCutting.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddInfrasctureAPI(builder.Configuration);
 builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<ProducerAWS>();
 
 var app = builder.Build();
 

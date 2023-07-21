@@ -19,9 +19,9 @@ namespace Student.CrossCutting.IoC
             opt.UseNpgsql(connectionString));
 
             services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IStudentService, StudentService>();
-            services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<IStudentCourseRepository, StudentCourseRepository>();
             services.AddScoped<IStudentCourseService, StudentCourseService>();
 

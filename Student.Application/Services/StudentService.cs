@@ -3,11 +3,6 @@ using Student.Application.Dtos;
 using Student.Application.Interfaces;
 using Student.Domain.Entities;
 using Student.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Student.Application.Services
 {
@@ -49,6 +44,13 @@ namespace Student.Application.Services
         {
             var studentResult = _studentRepository.GetStudentById(id).Result;
             await _studentRepository.RemoveStudent(studentResult);
+        }
+
+        public async Task<StudentDto> getByEmail(string email)
+        {
+            var studentTransfer = await _studentRepository.GetStudentByEmail(email);
+            var studentDto = _mapper.Map<StudentDto>(studentTransfer);
+            return studentDto;
         }
     }
 }

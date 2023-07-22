@@ -24,6 +24,8 @@ namespace Student.CrossCutting.IoC
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IStudentCourseRepository, StudentCourseRepository>();
             services.AddScoped<IStudentCourseService, StudentCourseService>();
+            services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
             services.AddAutoMapper(typeof(DomaintoDTOMappingProfile));
 

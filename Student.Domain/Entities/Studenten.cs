@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Student.Domain.Entities
 {
-    public class Studenten
+    public class Studenten : User
     {
         [Key]
         public int StudentenId { get; set; }

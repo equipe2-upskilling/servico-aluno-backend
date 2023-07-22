@@ -11,6 +11,7 @@ namespace Student.Application.Interfaces
     {
         Task<IEnumerable<StudentDto>> GetAll();
         Task<StudentDto> GetById(int id);
+        Task<StudentDto> getByEmail(string email);
         Task Add(StudentDto studentDto);
         Task Update(StudentDto studentDto);
         Task Delete(int id);

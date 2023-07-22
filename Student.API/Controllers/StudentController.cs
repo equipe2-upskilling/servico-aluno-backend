@@ -4,14 +4,16 @@ using Student.Application.Interfaces;
 
 namespace Student.API.Controllers
 {
-    [Route("student/v1/[Controller]")]
+    [Route("api/[Controller]")]
     [ApiController]
     public class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
-        public StudentController(IStudentService studentService)
+        private readonly IAuthenticationService _authenticationService;
+        public StudentController(IStudentService studentService, IAuthenticationService authenticationService)
         {
             _studentService = studentService;
+            _authenticationService = authenticationService;
         }
 
         [HttpGet]
@@ -34,8 +36,16 @@ namespace Student.API.Controllers
         public async Task<ActionResult> Post([FromBody] StudentDto studentDto)
         {
             if (!ModelState.IsValid) return BadRequest();
-            await _studentService.Add(studentDto);
-            return new CreatedAtRouteResult("GetStudent", new {id =  studentDto.Id}, studentDto);
+            bool createResult = await _authenticationService.CreateLogin(studentDto.Email, studentDto.Password);
+            if (createResult)
+            {
+                await _studentService.Add(studentDto);
+                return new CreatedAtRouteResult("GetStudent", new {id =  studentDto.Id}, studentDto);
+            }
+            else
+            {
+                throw new Exception("Falha na criãção de Login. Tente Novamente.");
+            }
         }
 
         [HttpDelete("{id:int}")]

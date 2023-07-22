@@ -1,9 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using Amazon;
+﻿using Amazon;
 using Amazon.SQS;
 using Amazon.SQS.Model;
-using Microsoft.Extensions.Configuration;
 
 namespace Student.API.ProducerSQS
 {

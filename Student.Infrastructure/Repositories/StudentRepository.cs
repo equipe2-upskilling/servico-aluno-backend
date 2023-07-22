@@ -2,18 +2,12 @@
 using Student.Domain.Entities;
 using Student.Domain.Interfaces;
 using Student.Infrastructure.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Student.Infrastructure.Repositories
 {
     public class StudentRepository : IStudentRepository
     {
         private readonly ApplicationDbContext _context;
-
         public StudentRepository(ApplicationDbContext context)
         {
             _context = context;
@@ -48,5 +42,10 @@ namespace Student.Infrastructure.Repositories
             return studenten;
         }
 
+        public Task<Studenten> GetStudentByEmail(string email)
+        {
+            var student = _context.Students.FirstOrDefaultAsync(s => s.Email == email);
+            return student;
+        }
     }
 }

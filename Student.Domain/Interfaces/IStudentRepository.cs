@@ -6,6 +6,7 @@ namespace Student.Domain.Interfaces
     {
         Task<IEnumerable<Studenten>> GetStudents();
         Task<Studenten> GetStudentById (int id);
+        Task<Studenten> GetStudentByEmail(string email);
         Task<Studenten> CreateStudent(Studenten student);
         Task<Studenten> UpdateStudent(Studenten student);
         Task<Studenten> RemoveStudent(Studenten student);

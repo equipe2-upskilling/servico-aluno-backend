@@ -33,7 +33,7 @@ namespace Student.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddStudentCourse([FromBody]StudentCourseDto studentCourseDto)
+        public async Task<ActionResult> AddStudentCourse(StudentCourseDto studentCourseDto)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace Student.API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateStudentCourse([FromBody] StudentCourseDto studentCourseDto)
+        public async Task<ActionResult> UpdateStudentCourse(StudentCourseDto studentCourseDto)
         {
             await _studentCourseService.UpdateStudentCourseInfo(studentCourseDto);
             return Ok(studentCourseDto);

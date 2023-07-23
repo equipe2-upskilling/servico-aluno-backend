@@ -46,7 +46,7 @@ namespace Student.Application.Services
             await _studentRepository.RemoveStudent(studentResult);
         }
 
-        public async Task<StudentDto> getByEmail(string email)
+        public async Task<StudentDto> GetByEmail(string email)
         {
             var studentTransfer = await _studentRepository.GetStudentByEmail(email);
             var studentDto = _mapper.Map<StudentDto>(studentTransfer);

@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Student.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Student.Infrastructure.Context
 {
@@ -20,6 +15,14 @@ namespace Student.Infrastructure.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Studenten>()
+                .Property(s => s.StudentenId)
+                .ValueGeneratedOnAdd();
+
+            modelBuilder.Entity<Course>()
+                .Property(s => s.CourseId)
+                .ValueGeneratedOnAdd();
+
             modelBuilder.Entity<StudentCourse>()
                 .HasKey(sc => new { sc.StudentenId, sc.CourseId });
 

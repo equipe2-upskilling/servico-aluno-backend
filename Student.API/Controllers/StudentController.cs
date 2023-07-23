@@ -33,19 +33,39 @@ namespace Student.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] StudentDto studentDto)
+        public async Task<ActionResult> PostWithCreateLoginLogin(StudentDto studentDto)
         {
             if (!ModelState.IsValid) return BadRequest();
+            if (studentDto.Email == null) return BadRequest("Email não pode ser vazio.");
+            if (studentDto.Password == null) return BadRequest("A senha não pode ser vazio.");
+
             bool createResult = await _authenticationService.CreateLogin(studentDto.Email, studentDto.Password);
+            
             if (createResult)
             {
                 await _studentService.Add(studentDto);
-                return new CreatedAtRouteResult("GetStudent", new {id =  studentDto.Id}, studentDto);
+                return new CreatedAtRouteResult("GetStudent", new {id =  studentDto.StudentId}, studentDto);
             }
             else
             {
-                throw new Exception("Falha na criãção de Login. Tente Novamente.");
+                throw new Exception("Falha na criação de Login. Tente Novamente.");
             }
+        }
+        [HttpPost]
+        public async Task<ActionResult> Post(StudentDto studentDto)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            await _studentService.Add(studentDto);
+            return new CreatedAtRouteResult("GetStudent", new { id = studentDto.StudentId }, studentDto);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Update(StudentDto studentDto)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            await _studentService.Update(studentDto);
+            return Ok(studentDto);
         }
 
         [HttpDelete("{id:int}")]

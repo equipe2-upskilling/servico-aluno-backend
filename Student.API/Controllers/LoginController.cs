@@ -23,7 +23,7 @@ namespace Student.API.Controllers
             bool loginResult = await _authenticationService.Login(email,password);
             if (loginResult) 
             {
-                var student = await _studentService.getByEmail(email);
+                var student = await _studentService.GetByEmail(email);
                 return student;
             }
             else

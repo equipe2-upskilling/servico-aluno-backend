@@ -12,10 +12,16 @@ namespace Student.API.ProducerSQS
         public ProducerAWS(IConfiguration configuration)
         {
             // Lê os valores do arquivo de configuração (appsettings.json)
-            string awsAccessKeyId = configuration["AWS:AccessKeyId"];
-            string awsSecretAccessKey = configuration["AWS:SecretAccessKey"];
-            string awsRegion = configuration["AWS:Region"];
-            string queueName = configuration["AWS:QueueName"];
+            string? awsAccessKeyId = configuration["AWS:AccessKeyId"];
+            string? awsSecretAccessKey = configuration["AWS:SecretAccessKey"];
+            string? awsRegion = configuration["AWS:Region"];
+            string? queueName = configuration["AWS:QueueName"];
+
+            if (awsAccessKeyId == null) throw new Exception("Chave de Acesso faltando.");
+            if (awsSecretAccessKey == null) throw new Exception("Segredo da Chave de Acesso faltando.");
+            if (awsRegion == null) throw new Exception("Região faltando.");
+            if (queueName == null) throw new Exception("Nome da fila faltando.");
+
 
             // Configuração do cliente SQS
             var sqsConfig = new AmazonSQSConfig
@@ -46,8 +52,7 @@ namespace Student.API.ProducerSQS
             }
             catch (Exception ex)
             {
-                // Trate a exceção aqui ou apenas lance-a novamente para ser tratada externamente
-                throw;
+                throw new Exception($"Erro: {ex.Message}");
             }
         }
 
@@ -66,8 +71,7 @@ namespace Student.API.ProducerSQS
             }
             catch (Exception ex)
             {
-                // Trate a exceção aqui ou apenas lance-a novamente para ser tratada externamente
-                throw;
+                throw new Exception($"Erro: {ex.Message}");
             }
         }
     }

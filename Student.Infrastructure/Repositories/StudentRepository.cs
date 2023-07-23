@@ -20,8 +20,7 @@ namespace Student.Infrastructure.Repositories
         public async Task<Studenten> GetStudentById(int id)
         {
             var student = await _context.Students.FindAsync(id);
-            if (student == null) throw new Exception("Não encontrado.");
-            return student;
+            return student ?? throw new Exception("Não encontrado.");
         }
         public async Task<Studenten> CreateStudent(Studenten student)
         {

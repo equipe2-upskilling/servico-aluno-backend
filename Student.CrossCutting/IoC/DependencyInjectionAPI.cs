@@ -20,10 +20,13 @@ namespace Student.CrossCutting.IoC
 
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<ICourseService, CourseService>();
+
             services.AddScoped<IStudentRepository, StudentRepository>();
             services.AddScoped<IStudentService, StudentService>();
+
             services.AddScoped<IStudentCourseRepository, StudentCourseRepository>();
             services.AddScoped<IStudentCourseService, StudentCourseService>();
+
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
 

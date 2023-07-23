@@ -10,7 +10,7 @@ namespace Student.ConsumerAWS.ConsumerSQS
     public class ConsumerAmazonWS
     {
         private readonly AmazonSQSClient _sqsClient;
-        private readonly string _queueUrl;
+        private readonly string? _queueUrl;
 
         public ConsumerAmazonWS(string awsAccessKeyId, string awsSecretAccessKey, string awsRegion, string queueName)
         {
@@ -62,25 +62,24 @@ namespace Student.ConsumerAWS.ConsumerSQS
             }
         }
 
-        private async Task SendHttpRequest(string message)
+        private static async Task SendHttpRequest(string message)
         {
-            string _apiBase = ConfigurationManager.AppSettings["ApiBase"];
-            string apiUrl = _apiBase + "api/update-student-course";
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var content = new StringContent(message, Encoding.UTF8, "application/json");
+            string? _apiBase = ConfigurationManager.AppSettings["ApiBase"];
+            string? apiUrl = _apiBase + "/StudentCourse";
+            
+            using HttpClient? client = new();
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var content = new StringContent(message, Encoding.UTF8, "application/json");
 
-                var response = await client.PutAsync(apiUrl, content);
-                if(!response.IsSuccessStatusCode)
-                {
-                    Console.WriteLine("Chamada Http realizada com Sucesso.");
-                }
-                else
-                {
-                    Console.WriteLine($"Falha na messagem: {response.StatusCode}");
-                }
+            var response = await client.PutAsync(apiUrl, content);
+            if (!response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Chamada Http realizada com Sucesso.");
+            }
+            else
+            {
+                Console.WriteLine($"Falha na messagem: {response.StatusCode}");
             }
         }
 
@@ -98,7 +97,6 @@ namespace Student.ConsumerAWS.ConsumerSQS
             }
             catch (Exception ex)
             {
-                // Trate a exceção aqui ou apenas lance-a novamente para ser tratada externamente
                 Console.WriteLine($"Erro ao deletar mensagem da fila SQS: {ex.Message}");
             }
         }
@@ -117,8 +115,7 @@ namespace Student.ConsumerAWS.ConsumerSQS
             }
             catch (Exception ex)
             {
-                // Trate a exceção aqui ou apenas lance-a novamente para ser tratada externamente
-                throw;
+                throw new Exception($"Erro: {ex.Message}");
             }
         }
     }

@@ -2,11 +2,6 @@
 using Student.Domain.Entities;
 using Student.Domain.Interfaces;
 using Student.Infrastructure.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Student.Infrastructure.Repositories
 {
@@ -29,8 +24,7 @@ namespace Student.Infrastructure.Repositories
         {
             var student = await _context.StudentsCourses.FirstOrDefaultAsync(s => s.StudentenId == studentId 
                                                                                   && s.CourseId == courseId);
-            if (student == null) throw new Exception("Nenhum Estudante/Curso associado a esse curso/estudante.");
-            return student;
+            return student ?? throw new Exception("Nenhum Estudante/Curso associado a esse curso/estudante.");
         }
 
         public async Task<StudentCourse> PostStudentCourseInfo(StudentCourse studentCourse)

@@ -14,7 +14,7 @@ namespace Student.API.Controllers
             _courseService = courseService;
         }
 
-        [HttpGet]
+        [HttpGet("/GetCourses")]
         public async Task<ActionResult<IEnumerable<StudentDto>>> GetAll()
         {
             var course = await _courseService.GetAll();

@@ -73,7 +73,7 @@ namespace Student.Infrastructure.Repositories
                 accessToken = JsonConvert.DeserializeObject<AccessToken>(conteudo);
                 if (accessToken.Authenticated)
                 {
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer ", accessToken.Token);
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken.Token);
                     return true;
                 }
             }

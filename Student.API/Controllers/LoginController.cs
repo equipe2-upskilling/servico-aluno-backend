@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Student.Application.Dtos;
 using Student.Application.Interfaces;
 
@@ -6,6 +7,7 @@ namespace Student.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class LoginController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;
@@ -17,7 +19,7 @@ namespace Student.API.Controllers
             _studentService = studentService;
         }
 
-        [HttpPost]
+        [HttpPost("/Login")]
         public async Task<StudentDto> Login (string email, string password)
         {
             bool loginResult = await _authenticationService.Login(email,password);

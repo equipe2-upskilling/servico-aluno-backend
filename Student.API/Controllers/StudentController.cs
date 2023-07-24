@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Student.Application.Dtos;
 using Student.Application.Interfaces;
 
@@ -6,6 +7,7 @@ namespace Student.API.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
+    //[Authorize]
     public class StudentController : ControllerBase
     {
         private readonly IStudentService _studentService;
@@ -16,7 +18,7 @@ namespace Student.API.Controllers
             _authenticationService = authenticationService;
         }
 
-        [HttpGet]
+        [HttpGet("/GetAllStudent")]
         public async Task<ActionResult<IEnumerable<StudentDto>>> GetAll()
         {
             var student = await _studentService.GetAll();
@@ -24,16 +26,16 @@ namespace Student.API.Controllers
             return Ok(student);
         }
 
-        [HttpGet("{id:int}", Name = "GetStudent")]
+        [HttpGet("/GetStudent/{id:int}", Name = "GetStudent")]
         public async Task<ActionResult<StudentDto>> GetStudent(int id)
         {
             var student = await _studentService.GetById(id);
             if (student == null) return NotFound("Não encotrado.");
             return Ok(student);
         }
-
-        [HttpPost]
-        public async Task<ActionResult> PostWithCreateLoginLogin(StudentDto studentDto)
+        [AllowAnonymous]
+        [HttpPost("/CreateStudentWithLogin")]
+        public async Task<ActionResult> PostWithCreateLogin(StudentDto studentDto)
         {
             if (!ModelState.IsValid) return BadRequest();
             if (studentDto.Email == null) return BadRequest("Email não pode ser vazio.");
@@ -51,7 +53,7 @@ namespace Student.API.Controllers
                 throw new Exception("Falha na criação de Login. Tente Novamente.");
             }
         }
-        [HttpPost]
+        [HttpPost("/CreateStudent")]
         public async Task<ActionResult> Post(StudentDto studentDto)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -60,7 +62,7 @@ namespace Student.API.Controllers
             return new CreatedAtRouteResult("GetStudent", new { id = studentDto.StudentId }, studentDto);
         }
 
-        [HttpPut]
+        [HttpPut("/UpdateStudent")]
         public async Task<ActionResult> Update(StudentDto studentDto)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -68,7 +70,7 @@ namespace Student.API.Controllers
             return Ok(studentDto);
         }
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("/DeleteStudent/{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
             var student = await _studentService.GetById(id);

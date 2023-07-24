@@ -1,24 +1,23 @@
-using Student.API.ProducerSQS;
+using Student.API.Extensions;
 using Student.CrossCutting.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.AddApiSwagger();
 builder.Services.AddInfrasctureAPI(builder.Configuration);
-builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<ProducerAWS>();
+builder.Services.AddCors();
+builder.AddExtensions();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+var environment = app.Environment;
+
+app.UseExceptionHandling(environment);
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

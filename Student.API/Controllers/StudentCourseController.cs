@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Student.API.ProducerSQS;
 using Student.Application.Dtos;
@@ -8,6 +9,7 @@ namespace Student.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class StudentCourseController : ControllerBase
     {
         private readonly IStudentCourseService _studentCourseService;
@@ -19,20 +21,20 @@ namespace Student.API.Controllers
             _producerAWS = producerAWS;
         }
 
-        [HttpGet]
+        [HttpGet("/GetAllStudentsCourses")]
         public async Task<ActionResult<IEnumerable<StudentCourseDto>>> GetAllStudentCourse()
         {
             var studentCourse = await _studentCourseService.GetAllStudentCourse();
             return Ok(studentCourse);
         }
-        [HttpGet("{StudentId:int}/{CourseId:int}")]
+        [HttpGet("/GetStudentCourse/{StudentId:int}/{CourseId:int}")]
         public async Task<ActionResult> GetStudentCourseById(int StudentId,int CourseId)
         {
             var student = await _studentCourseService.GetStudentCourse(StudentId, CourseId);
             return Ok(student);
         }
 
-        [HttpPost]
+        [HttpPost("/CreateStudentCourse")]
         public async Task<ActionResult> AddStudentCourse(StudentCourseDto studentCourseDto)
         {
             try
@@ -49,7 +51,7 @@ namespace Student.API.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("/UpdateStudentCouse")]
         public async Task<ActionResult> UpdateStudentCourse(StudentCourseDto studentCourseDto)
         {
             await _studentCourseService.UpdateStudentCourseInfo(studentCourseDto);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Student.API.Filters;
 using Student.API.ProducerSQS;
 using Student.Application.Dtos;
 using Student.Application.Interfaces;
@@ -8,8 +9,7 @@ using Student.Application.Interfaces;
 namespace Student.API.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    //[Authorize]
+    [Authentication]
     public class StudentCourseController : ControllerBase
     {
         private readonly IStudentCourseService _studentCourseService;

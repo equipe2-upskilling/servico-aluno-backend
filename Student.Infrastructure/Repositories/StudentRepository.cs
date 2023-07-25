@@ -43,7 +43,7 @@ namespace Student.Infrastructure.Repositories
 
         public Task<Studenten> GetStudentByEmail(string email)
         {
-            var student = _context.Students.FirstOrDefaultAsync(s => s.Email == email);
+            var student = _context.Students.FirstOrDefaultAsync(s => s.Username == email);
             return student;
         }
     }

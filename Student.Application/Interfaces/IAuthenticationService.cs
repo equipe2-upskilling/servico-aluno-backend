@@ -1,8 +1,10 @@
-﻿namespace Student.Application.Interfaces
+﻿using Student.Application.Dtos;
+
+namespace Student.Application.Interfaces
 {
     public interface IAuthenticationService
     {
-       Task<bool> CreateLogin(string email, string password);
-       Task<bool> Login(string email, string password);
+       Task<bool> CreateLogin(UserDto userDto);
+       Task<bool> Login(UserDto userDto);
     }
 }

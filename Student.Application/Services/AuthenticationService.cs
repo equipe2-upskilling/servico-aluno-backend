@@ -1,4 +1,7 @@
-﻿using Student.Application.Interfaces;
+﻿using AutoMapper;
+using Student.Application.Dtos;
+using Student.Application.Interfaces;
+using Student.Domain.Entities;
 using Student.Domain.Interfaces;
 
 namespace Student.Application.Services
@@ -6,22 +9,34 @@ namespace Student.Application.Services
     public class AuthenticationService : IAuthenticationService
     {
         private readonly IAuthenticationRepository _authenticationRepository;
+        private readonly IMapper _mapper;
 
-        public AuthenticationService(IAuthenticationRepository authenticationRepository)
+        public AuthenticationService(IAuthenticationRepository authenticationRepository, IMapper mapper)
         {
             _authenticationRepository = authenticationRepository;
+            _mapper = mapper;
         }
 
-        public async Task<bool> CreateLogin(string email, string password)
+        public async Task<bool> CreateLogin(UserDto userDto)
         {
-            await _authenticationRepository.CreateLogin(email, password);
-            return true;
+            var user = _mapper.Map<User>(userDto);
+            var result = await _authenticationRepository.CreateLogin(user);
+            if(result)
+            {
+                return true;
+            }
+            return false;
         }
 
-        public async Task<bool> Login(string email, string password)
+        public async Task<bool> Login(UserDto userDto)
         {
-            await _authenticationRepository.Login(email, password);
-            return true;
+            var user = _mapper.Map<User>(userDto);
+            var result = await _authenticationRepository.Login(user);
+            if (result)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -19,13 +19,13 @@ namespace Student.API.Controllers
             _studentService = studentService;
         }
 
-        [HttpPost("/Login")]
-        public async Task<StudentDto> Login (string email, string password)
+        [HttpPost("/LoginApplication")]
+        public async Task<StudentDto> LoginApplication ([FromBody]UserDto userDto)
         {
-            bool loginResult = await _authenticationService.Login(email,password);
+            bool loginResult = await _authenticationService.Login(userDto);
             if (loginResult) 
             {
-                var student = await _studentService.GetByEmail(email);
+                var student = await _studentService.GetByEmail(userDto.Username);
                 return student;
             }
             else

@@ -21,5 +21,13 @@ namespace Student.API.Controllers
             if (course == null) return NotFound();
             return Ok(course);
         }
+
+        [HttpGet("/GetCourse/{id:int}")]
+        public async Task<ActionResult> GetCourse(int id)
+        {
+            var course = await _courseService.GetById(id);
+            if(course == null) return NotFound();
+            return Ok(course);
+        }
     }
 }

@@ -10,8 +10,8 @@ namespace Student.Infrastructure.Repositories
         {}
         public async Task<IEnumerable<Course>> GetAllCourses()
         {
-            string _apiBase = "";
-            string _apiUrl = _apiBase + "/course";
+            string _apiBase = "https://localhost:7215/";
+            string _apiUrl = _apiBase + "all";
 
             using HttpClient client = new();
             var response = await client.GetAsync(_apiUrl);
@@ -27,6 +27,26 @@ namespace Student.Infrastructure.Repositories
                 throw new Exception("Erro ao receber os cursos");
             }
 
+        }
+
+        public async Task<Course> GetCourse(int id)
+        {
+            string _apiBase = "https://localhost:7215/";
+            string _apiUrl = _apiBase + $"api/Course/{id}";
+
+            using HttpClient client = new();
+            var response = await client.GetAsync(_apiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var courses = JsonConvert.DeserializeObject<Course>(content);
+                return courses;
+            }
+            else
+            {
+                throw new Exception("Erro ao receber os cursos");
+            }
         }
     }
 }

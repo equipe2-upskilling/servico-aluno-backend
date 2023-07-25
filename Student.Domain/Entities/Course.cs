@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Student.Domain.Enum;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Student.Domain.Entities
 {
-    public class Course
+    public partial class Course
     {
         [Key]
         public int CourseId { get; set; }
@@ -14,6 +16,19 @@ namespace Student.Domain.Entities
 
         [Required]
         public string? Description { get; set; }
+
+        [Required]
+        public int? Duration { get; set; }
+        
+        [Required]
+        public double? Price { get; set; }
+
+        public int? Enrollmentstatusid { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public DateTime? RegisterDate { get; set; }
+
+        public virtual Enrollmentstatus? Enrollmentstatus { get; set; }
 
         [JsonIgnore]
         public List<StudentCourse>? StudentCourse { get; set;}

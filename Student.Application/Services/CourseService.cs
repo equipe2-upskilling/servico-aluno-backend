@@ -21,5 +21,12 @@ namespace Student.Application.Services
             var courseDto = _mapper.Map<IEnumerable<CourseDto>>(course);
             return courseDto;
         }
+
+        public async Task<CourseDto> GetById(int id)
+        {
+            var course = await _courseRepository.GetCourse(id);
+            var courseDto = _mapper.Map<CourseDto>(course);
+            return courseDto;
+        }
     }
 }

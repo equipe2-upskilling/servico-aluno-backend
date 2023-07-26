@@ -37,6 +37,7 @@ namespace Student.API.Controllers
             return Ok(student);
         }
 
+        [Authentication]
         [HttpGet("/GetStudentByEmail{username:string}")]
         public async Task<ActionResult<StudentDto>> GetStudentByEmail(string email)
         {

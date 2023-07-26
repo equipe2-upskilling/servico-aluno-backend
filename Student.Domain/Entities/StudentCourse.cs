@@ -26,6 +26,13 @@ namespace Student.Domain.Entities
 
         public DateTime? Updated { get; set; }
 
+        public bool IsCompleted { get; set; }
+
+        [MaxLength(100)]
+        public string UrlRepository { get; set; }
+
+        public double Grade { get; set; }
+
         [JsonIgnore]
         public Studenten? Studenten { get; set; }
 

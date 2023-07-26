@@ -12,6 +12,8 @@ namespace Student.Infrastructure.Context
         public DbSet<Studenten> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<StudentCourse> StudentsCourses { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
+        public DbSet<StudentCourseLesson> StudentCourseLessons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -36,6 +36,14 @@ namespace Student.API.Controllers
             if (student == null) return NotFound("Não encotrado.");
             return Ok(student);
         }
+
+        [HttpGet("/GetStudentByEmail{username:string}")]
+        public async Task<ActionResult<StudentDto>> GetStudentByEmail(string email)
+        {
+            var student = await _studentService.GetByEmail(email);
+            if (student == null) return NotFound("Aluno não encontrado");
+            return Ok(student);
+        }
         
         [HttpPost("/CreateStudentWithLogin")]
         [AllowAnonymous]

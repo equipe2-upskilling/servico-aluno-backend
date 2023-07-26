@@ -38,27 +38,5 @@ namespace Student.Infrastructure.Repositories
             return false;
             
         }
-
-        public async Task<bool> Login(User user)
-        {
-            var urlBase = _apiUrl + "/login";
-            using HttpClient client = new();
-
-            try
-            {
-                var response = await client.PostAsJsonAsync(urlBase,user);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro " + ex.Message);
-            }
-
-            return false;
-        }
     }
 }

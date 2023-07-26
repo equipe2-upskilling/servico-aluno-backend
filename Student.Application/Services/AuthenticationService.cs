@@ -27,16 +27,5 @@ namespace Student.Application.Services
             }
             return false;
         }
-
-        public async Task<bool> Login(UserDto userDto)
-        {
-            var user = _mapper.Map<User>(userDto);
-            var result = await _authenticationRepository.Login(user);
-            if (result)
-            {
-                return true;
-            }
-            return false;
-        }
     }
 }

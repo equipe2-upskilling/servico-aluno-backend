@@ -18,25 +18,44 @@ namespace Student.Infrastructure.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Studenten>()
-                .Property(s => s.StudentenId)
-                .ValueGeneratedOnAdd();
+         .HasKey(s => s.StudentenId);
+
+            modelBuilder.Entity<StudentCourseLesson>()
+                .HasKey(scl => scl.StudentCourseLessonId);
 
             modelBuilder.Entity<Course>()
-                .Property(s => s.CourseId)
-                .ValueGeneratedOnAdd();
+                .HasKey(c => c.CourseId);
 
             modelBuilder.Entity<StudentCourse>()
-                .HasKey(sc => new { sc.StudentenId, sc.CourseId });
+                .HasKey(sc => sc.StudentCourseId);
+
+            modelBuilder.Entity<Lesson>()
+                .HasKey(l => l.LessonId);
 
             modelBuilder.Entity<StudentCourse>()
                 .HasOne(sc => sc.Studenten)
-                .WithMany(s => s.StudentCourse)
+                .WithMany()
                 .HasForeignKey(sc => sc.StudentenId);
 
             modelBuilder.Entity<StudentCourse>()
                 .HasOne(sc => sc.Course)
-                .WithMany(c => c.StudentCourse)
+                .WithMany()
                 .HasForeignKey(sc => sc.CourseId);
+
+            modelBuilder.Entity<Lesson>()
+                .HasOne(l => l.Courses)
+                .WithMany(c => c.Lessons) // Use a propriedade de navegação "Lessons" (plural) em vez de "Lesson" (singular)
+                .HasForeignKey(l => l.CourseId);
+
+            modelBuilder.Entity<StudentCourseLesson>()
+                .HasOne(scl => scl.Lesson)
+                .WithMany()
+                .HasForeignKey(scl => scl.LessonId);
+
+            modelBuilder.Entity<StudentCourseLesson>()
+                .HasOne(scl => scl.Studenten)
+                .WithMany()
+                .HasForeignKey(scl => scl.StudentenId);
         }
     }
 }

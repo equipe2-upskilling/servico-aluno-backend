@@ -9,8 +9,9 @@ namespace Student.Domain.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LessonId { get; set; }
 
-        
-        public Course? CourseId { get; set; }
+        public Course Courses { get; set; }
+
+        public int CourseId { get; set; }
 
         [MaxLength(100)]
         public string? TitleLesson { get; set;}

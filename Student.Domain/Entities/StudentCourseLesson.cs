@@ -8,14 +8,14 @@ namespace Student.Domain.Entities
         [Key]
         public int StudentCourseLessonId { get; set; }
 
-        
-        public Lesson? LessonId { get; set; }
+        public Lesson Lesson { get; set; }
+        public int LessonId { get; set; }
 
-        
-        public Course? CourseId { get; set;}
+        public Course Course { get; set; }
+        public int CourseId { get; set;}
 
-        
-        public Studenten? StudentenId { get; set; }
+        public Studenten Studenten { get; set; }
+        public int StudentenId { get; set; }
 
         public bool IsCompleted { get; set; } = false;
     }

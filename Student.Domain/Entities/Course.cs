@@ -33,5 +33,7 @@ namespace Student.Domain.Entities
         [JsonIgnore]
         public List<StudentCourse>? StudentCourse { get; set;}
 
+        public List<Lesson> Lessons { get; set; }
+
     }
 }

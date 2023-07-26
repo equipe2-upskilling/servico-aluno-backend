@@ -11,11 +11,9 @@ namespace Student.Domain.Entities
         public int StudentCourseId { get; set; }
 
         [Required]
-        [ForeignKey("StudenthenId")]
         public int StudentenId { get; set; }
 
         [Required]
-        [ForeignKey("CourseId")]
         public int CourseId { get; set; }
 
         [EnumDataType(typeof(StatusCourse))]

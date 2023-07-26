@@ -28,14 +28,14 @@ namespace Student.API.Controllers
             return Ok(studentCourse);
         }
         [HttpGet("/GetStudentCourse/{StudentId:int}/{CourseId:int}")]
-        public async Task<ActionResult> GetStudentCourseById(int StudentId,int CourseId)
+        public async Task<ActionResult> GetStudentCourseById([FromBody]int StudentId, [FromBody]int CourseId)
         {
             var student = await _studentCourseService.GetStudentCourse(StudentId, CourseId);
             return Ok(student);
         }
 
         [HttpPost("/CreateStudentCourse")]
-        public async Task<ActionResult> AddStudentCourse(StudentCourseDto studentCourseDto)
+        public async Task<ActionResult> AddStudentCourse([FromBody]StudentCourseDto studentCourseDto)
         {
             try
             {
@@ -52,7 +52,7 @@ namespace Student.API.Controllers
         }
 
         [HttpPut("/UpdateStudentCouse")]
-        public async Task<ActionResult> UpdateStudentCourse(StudentCourseDto studentCourseDto)
+        public async Task<ActionResult> UpdateStudentCourse([FromBody]StudentCourseDto studentCourseDto)
         {
             await _studentCourseService.UpdateStudentCourseInfo(studentCourseDto);
             return Ok(studentCourseDto);

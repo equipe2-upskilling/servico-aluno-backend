@@ -38,10 +38,10 @@ namespace Student.API.Controllers
         }
 
         [Authentication]
-        [HttpGet("/GetStudentByEmail{username:string}")]
-        public async Task<ActionResult<StudentDto>> GetStudentByEmail(string email)
+        [HttpGet("/GetStudentByEmail")]
+        public async Task<ActionResult<StudentDto>> GetStudentByEmail([FromBody] string username)
         {
-            var student = await _studentService.GetByEmail(email);
+            var student = await _studentService.GetByEmail(username);
             if (student == null) return NotFound("Aluno não encontrado");
             return Ok(student);
         }

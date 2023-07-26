@@ -17,6 +17,6 @@ namespace Student.Domain.Entities
         
         public Studenten? StudentenId { get; set; }
 
-        public bool IsCompleted { get; set; }
+        public bool IsCompleted { get; set; } = false;
     }
 }

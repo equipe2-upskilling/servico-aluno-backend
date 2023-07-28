@@ -14,7 +14,6 @@ namespace Student.Domain.Entities
         [StringLength(100, MinimumLength = 2, ErrorMessage = "O nome deve ter entre 2 e 100 caracteres")]
         public string? Name { get; set; }
 
-        [Required(ErrorMessage = "O endereço não pode ser vazio")]
         [StringLength(300, MinimumLength = 10, ErrorMessage = "O nome deve ter entre 10 e 300 caracteres")]
         public string? Address { get; set; }
         

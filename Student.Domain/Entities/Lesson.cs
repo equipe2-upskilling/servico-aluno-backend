@@ -19,7 +19,7 @@ namespace Student.Domain.Entities
         [MaxLength(100)]
         public string? DescriptionLesson { get; set; }
 
-        public int DurationLesson { get; set; }
+        public int? DurationLesson { get; set; }
         
         [MaxLength(100)]
         public string? VideoLesson { get; set; }

@@ -35,7 +35,7 @@ namespace Student.Application.Services
         public async Task PostStudentCourseInfo(StudentCourseDto studentCourseDto)
         {
             studentCourseDto.Status = StatusCourse.Pending;
-            studentCourseDto.Created = DateTime.Now;
+            studentCourseDto.Created = DateTime.UtcNow;
             var InfoTransfer = _mapper.Map<StudentCourse>(studentCourseDto);
             await _studentCourseRepository.PostStudentCourseInfo(InfoTransfer);
         }
@@ -43,7 +43,7 @@ namespace Student.Application.Services
         public async Task UpdateStudentCourseInfo(StudentCourseDto studentCourseDto)
         {
             studentCourseDto.Status = StatusCourse.Enabled;
-            studentCourseDto.Updated = DateTime.Now;
+            studentCourseDto.Updated = DateTime.UtcNow;
             var InfoTransfer = _mapper.Map<StudentCourse>(studentCourseDto);
             await _studentCourseRepository.UpdateStudentCourseInfo(InfoTransfer);
         }

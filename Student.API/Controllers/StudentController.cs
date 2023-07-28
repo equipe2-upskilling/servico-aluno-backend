@@ -39,7 +39,7 @@ namespace Student.API.Controllers
 
         [Authentication]
         [HttpGet("/GetStudentByEmail")]
-        public async Task<ActionResult<StudentDto>> GetStudentByEmail([FromBody] string username)
+        public async Task<ActionResult<StudentDto>> GetStudentByEmail(string username)
         {
             var student = await _studentService.GetByEmail(username);
             if (student == null) return NotFound("Aluno não encontrado");

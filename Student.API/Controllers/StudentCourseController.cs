@@ -9,7 +9,7 @@ using Student.Application.Interfaces;
 namespace Student.API.Controllers
 {
     [Route("api/[controller]")]
-    [Authentication]
+    //[Authentication]
     public class StudentCourseController : ControllerBase
     {
         private readonly IStudentCourseService _studentCourseService;
@@ -28,7 +28,7 @@ namespace Student.API.Controllers
             return Ok(studentCourse);
         }
         [HttpGet("/GetStudentCourse/{StudentId:int}/{CourseId:int}")]
-        public async Task<ActionResult> GetStudentCourseById([FromBody]int StudentId, [FromBody]int CourseId)
+        public async Task<ActionResult> GetStudentCourseById(int StudentId, int CourseId)
         {
             var student = await _studentCourseService.GetStudentCourse(StudentId, CourseId);
             return Ok(student);

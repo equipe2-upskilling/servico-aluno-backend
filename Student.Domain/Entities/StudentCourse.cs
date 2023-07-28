@@ -19,17 +19,16 @@ namespace Student.Domain.Entities
         [EnumDataType(typeof(StatusCourse))]
         public StatusCourse Status { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime Created { get; set; }
+        public DateTime? Created { get; set; }
 
         public DateTime? Updated { get; set; }
 
         public bool IsCompleted { get; set; }
 
         [MaxLength(100)]
-        public string UrlRepository { get; set; }
+        public string? UrlRepository { get; set; }
 
-        public double Grade { get; set; }
+        public double? Grade { get; set; }
 
         [JsonIgnore]
         public Studenten? Studenten { get; set; }

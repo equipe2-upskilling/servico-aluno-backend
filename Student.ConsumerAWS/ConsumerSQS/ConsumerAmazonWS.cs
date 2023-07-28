@@ -1,9 +1,13 @@
 ﻿using Amazon;
 using Amazon.SQS;
 using Amazon.SQS.Model;
+using Newtonsoft.Json;
+using Student.Application.Dtos;
 using System.Configuration;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Student.ConsumerAWS.ConsumerSQS
 {
@@ -65,14 +69,26 @@ namespace Student.ConsumerAWS.ConsumerSQS
         private static async Task SendHttpRequest(string message)
         {
             string? _apiBase = ConfigurationManager.AppSettings["ApiBase"];
-            string? apiUrl = _apiBase + "/StudentCourse";
+            string? apiUrl = _apiBase + "/UpdateStudentCouse";
             
             using HttpClient? client = new();
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var content = new StringContent(message, Encoding.UTF8, "application/json");
+            var content = JsonConvert.DeserializeObject<StudentCourseDto>(message);
 
-            var response = await client.PutAsync(apiUrl, content);
+            StudentCourseDto studentCourseDto = new StudentCourseDto
+            {
+                StudentenId = content.StudentenId,
+                StudentCourseId = content.StudentCourseId,
+                Course = content.Course,
+                CourseId = content.CourseId,
+                Created = content.Created,
+                Status = content.Status,
+                Studenten = content.Studenten,
+                Updated = content.Updated
+            };
+
+            var response = await client.PutAsJsonAsync(apiUrl, studentCourseDto);
             if (!response.IsSuccessStatusCode)
             {
                 Console.WriteLine("Chamada Http realizada com Sucesso.");

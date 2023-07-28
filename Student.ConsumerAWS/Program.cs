@@ -23,5 +23,5 @@ while (!cancellationTokenSource.Token.IsCancellationRequested)
 {
     Console.WriteLine("Esperando Mensagem....");
     await consumer.StartListening(cancellationTokenSource.Token);
-    await Task.Delay(TimeSpan.FromSeconds(10), cancellationTokenSource.Token);
+    await Task.Delay(TimeSpan.FromSeconds(120), cancellationTokenSource.Token);
 }

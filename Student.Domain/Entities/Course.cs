@@ -22,7 +22,7 @@ namespace Student.Domain.Entities
         
         [Required]
         public double? Price { get; set; }
-
+        [JsonIgnore]
         public int? Enrollmentstatusid { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -32,7 +32,7 @@ namespace Student.Domain.Entities
 
         [JsonIgnore]
         public List<StudentCourse>? StudentCourse { get; set;}
-
+        [JsonIgnore]
         public List<Lesson> Lessons { get; set; }
 
     }

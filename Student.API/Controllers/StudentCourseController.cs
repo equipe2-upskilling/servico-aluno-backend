@@ -9,7 +9,7 @@ using Student.Application.Interfaces;
 namespace Student.API.Controllers
 {
     [Route("api/[controller]")]
-    [Authentication]
+    //[Authentication]
     public class StudentCourseController : ControllerBase
     {
         private readonly IStudentCourseService _studentCourseService;

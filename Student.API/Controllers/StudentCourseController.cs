@@ -39,8 +39,8 @@ namespace Student.API.Controllers
         {
             try
             {
-                //string message = JsonConvert.SerializeObject(studentCourseDto);
-                //await _producerAWS.SendMessageToSQS(message);
+                string message = JsonConvert.SerializeObject(studentCourseDto);
+                await _producerAWS.SendMessageToSQS(message);
 
                 await _studentCourseService.PostStudentCourseInfo(studentCourseDto);
                 return Ok(studentCourseDto);
@@ -51,12 +51,22 @@ namespace Student.API.Controllers
             }
         }
 
+        [HttpPost("/PostUrlStudentCourse")]
+        public async Task<ActionResult> PostUrlStudentCourse([FromBody]StudentCourseDto studentCourseDto, string url)
+        {
+            await _studentCourseService.PostUrlRepository(studentCourseDto, url);
+            return NoContent();
+        }
+
+
         [HttpPut("/UpdateStudentCouse")]
         public async Task<ActionResult> UpdateStudentCourse([FromBody]StudentCourseDto studentCourseDto)
         {
             await _studentCourseService.UpdateStudentCourseInfo(studentCourseDto);
             return Ok(studentCourseDto);
         }
+
+        
 
     }
 }

@@ -7,6 +7,7 @@ namespace Student.Application.Interfaces
         Task <IEnumerable<StudentCourseDto>> GetAllStudentCourse ();
         Task<StudentCourseDto> GetStudentCourse (int StudentId,int CourseId);
         Task PostStudentCourseInfo(StudentCourseDto studentCourseDto);
+        Task PostUrlRepository(StudentCourseDto studentCourseDto, string url);
         Task UpdateStudentCourseInfo(StudentCourseDto studentCourseDto);
     }
 }

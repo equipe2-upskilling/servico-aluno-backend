@@ -40,6 +40,13 @@ namespace Student.Application.Services
             await _studentCourseRepository.PostStudentCourseInfo(InfoTransfer);
         }
 
+        public async Task PostUrlRepository(StudentCourseDto studentCourseDto,string url)
+        {
+            studentCourseDto.UrlRepository = url;
+            var InfoTransfer = _mapper.Map<StudentCourse>(studentCourseDto);
+            await _studentCourseRepository.UpdateStudentCourseInfo(InfoTransfer);
+        }
+
         public async Task UpdateStudentCourseInfo(StudentCourseDto studentCourseDto)
         {
             studentCourseDto.Status = StatusCourse.Enabled;

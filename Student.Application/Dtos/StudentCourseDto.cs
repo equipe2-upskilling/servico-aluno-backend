@@ -17,6 +17,8 @@ namespace Student.Application.Dtos
         [JsonIgnore]
         public DateTime Updated { get; set; }
         [JsonIgnore]
+        public string? UrlRepository { get; set; }
+        [JsonIgnore]
         public Studenten? Studenten { get; set; }
         [JsonIgnore]
         public Course? Course { get; set; }

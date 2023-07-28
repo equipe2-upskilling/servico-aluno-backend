@@ -8,6 +8,7 @@ namespace Student.Application.Interfaces
         Task<StudentCourseLessonDto> GetStudentCourseLessonById(int id);
         Task AddStudentCourseLesson(StudentCourseLessonDto studentCourseLessonDto);
         Task UpdateStudentCourseLesson(StudentCourseLessonDto studentCourseLessonDto);
+        Task UpdateisCompletedStudentCourseLesson(StudentCourseLessonDto studentCourseLessonDto);
         Task DeleteStudentCourseLesson(int id);
     }
 }

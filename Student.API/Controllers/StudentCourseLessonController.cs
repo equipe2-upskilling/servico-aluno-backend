@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Student.Application.Dtos;
 using Student.Application.Interfaces;
+using Student.Application.Services;
 
 namespace Student.API.Controllers
 {
@@ -40,6 +41,14 @@ namespace Student.API.Controllers
             await _studentCourseLessonService.UpdateStudentCourseLesson(studentCourseLessonDto);
             return Ok();
         }
+
+        [HttpPut("/UpdateisCompletedStudentCourseLesson")]
+        public async Task<ActionResult> UpdateCompletedLessonStudentCourse([FromBody] StudentCourseLessonDto studentCourseLessonDto)
+        {
+            await _studentCourseLessonService.UpdateisCompletedStudentCourseLesson(studentCourseLessonDto);
+            return NoContent();
+        }
+
         [HttpDelete("/DeleteStudentCourseLesson/{id:int}")]
         public async Task<ActionResult> DeleteStudentCourseLesson(int id)
         {

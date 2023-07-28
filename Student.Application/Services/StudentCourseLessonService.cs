@@ -52,5 +52,13 @@ namespace Student.Application.Services
             var studentResult = _studentCourseLessonRepository.GetStudentCourseLessonById(id).Result;
             await _studentCourseLessonRepository.DeleteStudentCourseLesson(studentResult);
         }
+
+        public async Task UpdateisCompletedStudentCourseLesson(StudentCourseLessonDto studentCourseLessonDto)
+        {
+            studentCourseLessonDto.IsCompleted = true;
+
+            var studentCourseLesson = _mapper.Map<StudentCourseLesson>(studentCourseLessonDto);
+            await _studentCourseLessonRepository.UpdateStudentCourseLesson(studentCourseLesson);
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace Student.API.Controllers
             return Ok(studentCourse);
         }
         [HttpGet("/GetStudentCourse/{StudentId:int}/{CourseId:int}")]
-        public async Task<ActionResult> GetStudentCourseById([FromBody]int StudentId, [FromBody]int CourseId)
+        public async Task<ActionResult> GetStudentCourseById(int StudentId, int CourseId)
         {
             var student = await _studentCourseService.GetStudentCourse(StudentId, CourseId);
             return Ok(student);
@@ -39,8 +39,8 @@ namespace Student.API.Controllers
         {
             try
             {
-                string message = JsonConvert.SerializeObject(studentCourseDto);
-                await _producerAWS.SendMessageToSQS(message);
+                //string message = JsonConvert.SerializeObject(studentCourseDto);
+                //await _producerAWS.SendMessageToSQS(message);
 
                 await _studentCourseService.PostStudentCourseInfo(studentCourseDto);
                 return Ok(studentCourseDto);
